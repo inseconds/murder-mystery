@@ -1,4 +1,4 @@
-package com.murder.mystery.server.netty.controller;
+package com.murder.mystery.server.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class URLController {
 
     @RequestMapping("/")
-    public String WebsocketChatClient(){
-        return "/WebsocketChatClient";
+    public String HelloWord(){
+        return "/HelloWord";
     }
 
 
