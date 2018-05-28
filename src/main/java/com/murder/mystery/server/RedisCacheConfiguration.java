@@ -25,7 +25,8 @@ import java.net.UnknownHostException;
 @Configuration
 @EnableCaching
 public class RedisCacheConfiguration extends CachingConfigurerSupport {
-    Logger logger = LoggerFactory.getLogger(RedisCacheConfiguration.class);
+
+    private static final Logger logger = LoggerFactory.getLogger(RedisCacheConfiguration.class);
 
     @Value("${spring.redis.host}")
     private String host;
