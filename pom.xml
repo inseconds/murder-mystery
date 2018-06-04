@@ -19,6 +19,7 @@
     <modules>
         <module>common</module>
         <module>server</module>
+        <module>model</module>
     </modules>
 
     <properties>
@@ -32,6 +33,18 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.murder-mystery</groupId>
+                <artifactId>common</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.murder-mystery</groupId>
+                <artifactId>server</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>

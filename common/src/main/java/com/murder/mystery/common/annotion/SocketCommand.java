@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.murder.mystery.common.core.annotion;
+package com.murder.mystery.common.annotion;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -9,17 +9,18 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 请求模块
+ * 请求命令
  * @author -琴兽-
  *
  */
-@Target(ElementType.TYPE)
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface SocketModule {
+public @interface SocketCommand {
 	
 	/**
-	 * 请求的模块号
+	 * 请求的命令号
 	 * @return
 	 */
-	short module();
+	short cmd();
+
 }
