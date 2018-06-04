@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<property name="log.base" value="murder-mystery" /> <!-- 工程名-->
+
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{256}  - %msg%n
+			</Pattern>
+		</encoder>
+	</appender>
+
+	<!-- 不同級別的文件記錄在不同的日誌文件中 -->
+	<appender name="fileInfo"
+			  class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<Encoding>UTF-8</Encoding>-->
+		<file>/data/log/${log.base}/info/info.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!--在工程目录下自动生成logs文件夹 -->
+			<FileNamePattern>/data/log/${log.base}/info/info.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<!-- 最多保存X天 -->
+			<MaxHistory>5</MaxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{256} - %msg%n</pattern>
+		</layout>
+		<!-- <param name="LocationInfo" value="true" /> -->
+		<!-- 过滤器，只记录INFO级别的日志 -->
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+
+	<appender name="fileWarn" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<Encoding>UTF-8</Encoding>-->
+		<file>/data/log/${log.base}/warn/warn.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>/data/log/${log.base}/warn/warn.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<MaxHistory>30</MaxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{256} - %msg%n</pattern>
+		</layout>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>WARN</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+
+	<appender name="fileError" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<Encoding>UTF-8</Encoding>-->
+		<file>/data/log/${log.base}/error/error.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>/data/log/${log.base}/error/error.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<MaxHistory>30</MaxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{256} - %msg%n</pattern>
+		</layout>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+
+	<!-- 请求响应日志 -->
+	<appender name="requestInfo"
+			  class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/data/log/${log.base}/request/info.log</file>
+		<!--<Encoding>UTF-8</Encoding>-->
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!--在工程目录下自动生成logs文件夹 -->
+			<FileNamePattern>/data/log/${log.base}/request/info.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<MaxHistory>10</MaxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{256} - %msg%n</pattern>
+		</layout>
+	</appender>
+
+	<appender name="sqlProfile"
+			  class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<Encoding>UTF-8</Encoding>-->
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>/data/log/${log.base}/sql/sql.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<MaxHistory>20</MaxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{host}] [%thread] %-5level %logger{256} - %msg%n</pattern>
+		</layout>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+
+	<appender name ="asyncSqlProfile" class= "ch.qos.logback.classic.AsyncAppender">
+		<discardingThreshold >100</discardingThreshold>
+		<queueSize>1024</queueSize>
+		<appender-ref ref ="sqlProfile"/>
+	</appender>
+
+	<appender name ="asyncInfo" class= "ch.qos.logback.classic.AsyncAppender">
+		<!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+		<discardingThreshold >100</discardingThreshold>
+		<!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+		<queueSize>1024</queueSize>
+		<!-- 添加附加的appender,最多只能添加一个 -->
+		<appender-ref ref ="fileInfo"/>
+	</appender>
+
+	<appender name ="asyncWarn" class= "ch.qos.logback.classic.AsyncAppender">
+		<discardingThreshold >100</discardingThreshold>
+		<queueSize>1024</queueSize>
+		<appender-ref ref ="fileWarn"/>
+	</appender>
+
+	<appender name ="asyncError" class= "ch.qos.logback.classic.AsyncAppender">
+		<discardingThreshold >100</discardingThreshold>
+		<queueSize>1024</queueSize>
+		<appender-ref ref ="fileError"/>
+	</appender>
+
+	<appender name ="asyncRequestinfo" class= "ch.qos.logback.classic.AsyncAppender">
+		<discardingThreshold >100</discardingThreshold>
+		<queueSize>1024</queueSize>
+		<appender-ref ref ="requestInfo"/>
+	</appender>
+
+	<logger name="RequestVoAdvice" level="info" additivity="false">
+		<appender-ref ref="asyncRequestinfo" />
+	</logger>
+
+	<logger name="ResponseVoAdvice" level="info" additivity="false">
+		<appender-ref ref="asyncRequestinfo" />
+	</logger>
+
+	<root>
+		<level value="info" />
+		<appender-ref ref="stdout"/>
+		<appender-ref ref="asyncInfo" />
+		<appender-ref ref="asyncWarn" />
+		<appender-ref ref="asyncError" />
+	</root>
+</configuration>   
