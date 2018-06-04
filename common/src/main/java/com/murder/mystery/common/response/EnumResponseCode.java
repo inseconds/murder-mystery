@@ -1,4 +1,4 @@
-package com.murder.mystery.server.response;
+package com.murder.mystery.common.response;
 
 /**
  * 鍖呭惈鍝嶅簲缂栧彿銆佸搷搴旀枃锟�?

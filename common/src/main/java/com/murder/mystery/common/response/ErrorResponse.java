@@ -1,4 +1,4 @@
-package com.murder.mystery.server.response;
+package com.murder.mystery.common.response;
 
 import com.alibaba.fastjson.annotation.JSONField;
 

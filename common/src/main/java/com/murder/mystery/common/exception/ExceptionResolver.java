@@ -2,8 +2,8 @@ package com.murder.mystery.common.exception;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.murder.mystery.server.response.DataResponse;
-import com.murder.mystery.server.response.ResponseCode;
+import com.murder.mystery.common.response.DataResponse;
+import com.murder.mystery.common.response.ResponseCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.MethodArgumentNotValidException;

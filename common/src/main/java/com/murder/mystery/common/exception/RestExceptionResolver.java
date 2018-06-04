@@ -1,7 +1,7 @@
 package com.murder.mystery.common.exception;
 
-import com.murder.mystery.server.response.ResponseCode;
-import com.murder.mystery.server.response.ServiceResponse;
+import com.murder.mystery.common.response.ResponseCode;
+import com.murder.mystery.common.response.ServiceResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
