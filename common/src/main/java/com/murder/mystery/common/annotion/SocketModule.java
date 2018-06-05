@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.murder.mystery.common.annotion;
 
 import java.lang.annotation.ElementType;
