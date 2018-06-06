@@ -9,7 +9,7 @@ import com.murder.mystery.common.core.session.Session;
 import com.murder.mystery.common.core.session.SessionImpl;
 import com.murder.mystery.common.core.session.SessionManager;
 import com.murder.mystery.common.module.ModuleId;
-import com.murder.mystery.server.module.player.dao.entity.Player;
+import com.murder.mystery.server.module.player.entity.Player;
 import com.murder.mystery.server.scanner.Invoker;
 import com.murder.mystery.server.scanner.InvokerHoler;
 import com.google.protobuf.GeneratedMessage;

@@ -6,7 +6,7 @@ import com.murder.mystery.common.core.session.Session;
 import com.murder.mystery.common.core.session.SessionManager;
 import com.murder.mystery.common.module.player.response.PlayerResponse;
 import com.murder.mystery.server.module.player.dao.PlayerDao;
-import com.murder.mystery.server.module.player.dao.entity.Player;
+import com.murder.mystery.server.module.player.entity.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

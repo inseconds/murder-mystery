@@ -1,6 +1,6 @@
 package com.murder.mystery.server.module.player.dao;
 
-import com.murder.mystery.server.module.player.dao.entity.Player;
+import com.murder.mystery.server.module.player.entity.Player;
 import org.hibernate.HibernateException;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;

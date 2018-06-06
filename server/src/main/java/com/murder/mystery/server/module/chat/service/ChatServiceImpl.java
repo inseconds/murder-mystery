@@ -8,7 +8,7 @@ import com.murder.mystery.common.module.chat.ChatCmd;
 import com.murder.mystery.common.module.chat.response.ChatResponse;
 import com.murder.mystery.common.module.chat.response.ChatType;
 import com.murder.mystery.server.module.player.dao.PlayerDao;
-import com.murder.mystery.server.module.player.dao.entity.Player;
+import com.murder.mystery.server.module.player.entity.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
