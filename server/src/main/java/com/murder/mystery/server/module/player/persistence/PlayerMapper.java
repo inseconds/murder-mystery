@@ -1,6 +1,7 @@
 package com.murder.mystery.server.module.player.persistence;
 
 import com.murder.mystery.server.module.player.entity.Player;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * Created by jgsoft on 2018/6/6.
@@ -12,7 +13,7 @@ public interface PlayerMapper {
      * @param playerId 玩家id
      * @return
      */
-    Player getPlayerById(long playerId);
+    Player getPlayerById(@Param("playerId") long playerId);
 
 
     /**
@@ -20,7 +21,7 @@ public interface PlayerMapper {
      * @param playerName 玩家名称
      * @return
      */
-    Player getPlayerByName(final String playerName);
+    Player getPlayerByName(@Param("playerName") String playerName);
 
 
     /**

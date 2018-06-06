@@ -6,7 +6,12 @@ package com.murder.mystery.server.module.player.entity;
  *
  */
 public class Player {
-	
+
+	/**
+	 * 主键id
+	 */
+	private long id;
+
 	/**
 	 * 玩家id
 	 */
@@ -31,6 +36,14 @@ public class Player {
 	 * 经验
 	 */
 	private int exp;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public long getPlayerId() {
 		return playerId;
