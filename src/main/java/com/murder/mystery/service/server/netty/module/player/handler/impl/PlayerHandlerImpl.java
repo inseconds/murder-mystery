@@ -1,6 +1,6 @@
 package com.murder.mystery.service.server.netty.module.player.handler.impl;
 
-import com.murder.mystery.service.server.core.model.Request;
+import com.murder.mystery.service.server.netty.model.Request;
 import com.murder.mystery.service.server.netty.module.player.handler.PlayerHandler;
 import com.murder.mystery.service.server.netty.session.Session;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;

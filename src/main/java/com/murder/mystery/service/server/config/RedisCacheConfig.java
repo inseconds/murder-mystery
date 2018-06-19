@@ -1,4 +1,4 @@
-package com.murder.mystery.service.server;
+package com.murder.mystery.service.server.config;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,9 +24,9 @@ import java.net.UnknownHostException;
  */
 @Configuration
 @EnableCaching
-public class RedisCacheConfiguration extends CachingConfigurerSupport {
+public class RedisCacheConfig extends CachingConfigurerSupport {
 
-    private static final Logger logger = LoggerFactory.getLogger(RedisCacheConfiguration.class);
+    private static final Logger logger = LoggerFactory.getLogger(RedisCacheConfig.class);
 
     @Value("${spring.redis.host}")
     private String host;

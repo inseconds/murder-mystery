@@ -1,4 +1,5 @@
-package com.murder.mystery.service.server.core.model;
+package com.murder.mystery.service.server.netty.model;
+
 /**
  * 回复消息
  * @author -琴兽-

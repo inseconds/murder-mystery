@@ -1,4 +1,4 @@
-package com.murder.mystery.service.server.core.model;
+package com.murder.mystery.service.server.netty.model;
 
 public interface ResultCode {
 	
