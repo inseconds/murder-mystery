@@ -47,6 +47,21 @@
         <table tableName="drama" domainObjectName="Drama">
             <generatedKey column="id" sqlStatement="JDBC" identity="true"/>
         </table>
+        <table tableName="character" domainObjectName="Character">
+            <generatedKey column="id" sqlStatement="JDBC" identity="true"/>
+        </table>
+        <table tableName="user" domainObjectName="User">
+            <generatedKey column="id" sqlStatement="JDBC" identity="true"/>
+        </table>
+        <table tableName="game_user" domainObjectName="GameUser">
+            <generatedKey column="id" sqlStatement="JDBC" identity="true"/>
+        </table>
+        <table tableName="game_user_evidence" domainObjectName="GameUserEvidence">
+            <generatedKey column="id" sqlStatement="JDBC" identity="true"/>
+        </table>
+        <table tableName="game_room" domainObjectName="GameRoom">
+            <generatedKey column="id" sqlStatement="JDBC" identity="true"/>
+        </table>
     </context>
 
 </generatorConfiguration>
