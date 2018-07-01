@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.murder.mystery.service.server.mapper.GameUserMapper" >
+  <resultMap id="BaseResultMap" type="com.murder.mystery.service.server.domain.GameUser" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="character_id" property="characterId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="action_count" property="actionCount" jdbcType="INTEGER" />
+    <result column="voted" property="voted" jdbcType="INTEGER" />
+    <result column="vote_game_user_id" property="voteGameUserId" jdbcType="INTEGER" />
+    <result column="room_id" property="roomId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, character_id, user_id, action_count, voted, vote_game_user_id, room_id, `status`
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.murder.mystery.service.server.domain.GameUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from game_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from game_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from game_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.murder.mystery.service.server.domain.GameUserExample" >
+    delete from game_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.murder.mystery.service.server.domain.GameUser" useGeneratedKeys="true" keyProperty="id" >
+    insert into game_user (character_id, user_id, action_count, 
+      voted, vote_game_user_id, room_id, 
+      `status`)
+    values (#{characterId,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}, #{actionCount,jdbcType=INTEGER}, 
+      #{voted,jdbcType=INTEGER}, #{voteGameUserId,jdbcType=INTEGER}, #{roomId,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.murder.mystery.service.server.domain.GameUser" useGeneratedKeys="true" keyProperty="id" >
+    insert into game_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="characterId != null" >
+        character_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="actionCount != null" >
+        action_count,
+      </if>
+      <if test="voted != null" >
+        voted,
+      </if>
+      <if test="voteGameUserId != null" >
+        vote_game_user_id,
+      </if>
+      <if test="roomId != null" >
+        room_id,
+      </if>
+      <if test="status != null" >
+        `status`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="characterId != null" >
+        #{characterId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="actionCount != null" >
+        #{actionCount,jdbcType=INTEGER},
+      </if>
+      <if test="voted != null" >
+        #{voted,jdbcType=INTEGER},
+      </if>
+      <if test="voteGameUserId != null" >
+        #{voteGameUserId,jdbcType=INTEGER},
+      </if>
+      <if test="roomId != null" >
+        #{roomId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.murder.mystery.service.server.domain.GameUserExample" resultType="java.lang.Integer" >
+    select count(*) from game_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update game_user
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.characterId != null" >
+        character_id = #{record.characterId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.actionCount != null" >
+        action_count = #{record.actionCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.voted != null" >
+        voted = #{record.voted,jdbcType=INTEGER},
+      </if>
+      <if test="record.voteGameUserId != null" >
+        vote_game_user_id = #{record.voteGameUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.roomId != null" >
+        room_id = #{record.roomId,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        `status` = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update game_user
+    set id = #{record.id,jdbcType=INTEGER},
+      character_id = #{record.characterId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      action_count = #{record.actionCount,jdbcType=INTEGER},
+      voted = #{record.voted,jdbcType=INTEGER},
+      vote_game_user_id = #{record.voteGameUserId,jdbcType=INTEGER},
+      room_id = #{record.roomId,jdbcType=INTEGER},
+      `status` = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.murder.mystery.service.server.domain.GameUser" >
+    update game_user
+    <set >
+      <if test="characterId != null" >
+        character_id = #{characterId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="actionCount != null" >
+        action_count = #{actionCount,jdbcType=INTEGER},
+      </if>
+      <if test="voted != null" >
+        voted = #{voted,jdbcType=INTEGER},
+      </if>
+      <if test="voteGameUserId != null" >
+        vote_game_user_id = #{voteGameUserId,jdbcType=INTEGER},
+      </if>
+      <if test="roomId != null" >
+        room_id = #{roomId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.murder.mystery.service.server.domain.GameUser" >
+    update game_user
+    set character_id = #{characterId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=BIGINT},
+      action_count = #{actionCount,jdbcType=INTEGER},
+      voted = #{voted,jdbcType=INTEGER},
+      vote_game_user_id = #{voteGameUserId,jdbcType=INTEGER},
+      room_id = #{roomId,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.murder.mystery.service.server.domain.GameUserExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from game_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>
