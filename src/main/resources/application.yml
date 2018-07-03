@@ -1,18 +1,18 @@
 spring:
   redis:
-    host: localhost
+    host: 47.96.135.54
     port: 6379
     pool.max-idle: 8
     pool.min-idle: 0
     pool.max-active: 8
     pool.max-wait: -1
-    password:
-    timeout: 0
+    password: Xujunmeng123456
+    timeout: 60000
   datasource:
-    name: cardiff
-    url: jdbc:mysql://localhost:3306/cardiff?useUnicode=true&zeroDateTimeBehavior=convertToNull
+    name: murder_mystery
+    url: jdbc:mysql://localhost:3306/murder_mystery?useUnicode=true&zeroDateTimeBehavior=convertToNull
     username: root
-    password:
+    password: 123456
     # 使用druid数据源
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
