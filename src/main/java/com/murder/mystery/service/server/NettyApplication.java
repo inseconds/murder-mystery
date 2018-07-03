@@ -22,70 +22,60 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-@PropertySource(value= "classpath:/nettyserver.properties")
+@PropertySource(value = "classpath:/nettyserver.properties")
 @SpringBootApplication
 public class NettyApplication {
 
-	@Value("${tcp.port}")
-	private int tcpPort;
+    @Value("${tcp.port}")
+    private int tcpPort;
 
-	@Value("${boss.thread.count}")
-	private int bossCount;
+    @Value("${boss.thread.count}")
+    private int bossCount;
 
-	@Value("${worker.thread.count}")
-	private int workerCount;
+    @Value("${worker.thread.count}")
+    private int workerCount;
 
-	@Value("${so.keepalive}")
-	private boolean keepAlive;
+    @Value("${so.keepalive}")
+    private boolean keepAlive;
 
-	@Value("${so.backlog}")
-	private int backlog;
+    @Value("${so.backlog}")
+    private int backlog;
 
-	@Bean(name = "serverBootstrap")
-	public ServerBootstrap bootstrap() {
-		ServerBootstrap b = new ServerBootstrap();
-		b.group(bossGroup(), workerGroup())
-				.channel(NioServerSocketChannel.class)
-				.handler(new LoggingHandler(LogLevel.DEBUG))
-				.childHandler(nettyWebSocketChannelInitializer);
-		Map<ChannelOption<?>, Object> tcpChannelOptions = tcpChannelOptions();
-		Set<ChannelOption<?>> keySet = tcpChannelOptions.keySet();
-		for (@SuppressWarnings("rawtypes") ChannelOption option : keySet) {
-			b.option(option, tcpChannelOptions.get(option));
-		}
-		return b;
-	}
+    @Bean(name = "serverBootstrap")
+    public ServerBootstrap bootstrap() {
+        ServerBootstrap serverBootstrap = new ServerBootstrap();
+        serverBootstrap.group(bossGroup(), workerGroup())
+                .channel(NioServerSocketChannel.class)
+                .handler(new LoggingHandler(LogLevel.DEBUG))
+                .childHandler(nettyWebSocketChannelInitializer)
+                .option(ChannelOption.SO_BACKLOG, 2048)//serverSocketchannel的设置，链接缓冲池的大小
+                .childOption(ChannelOption.SO_KEEPALIVE, true)//socketchannel的设置,维持链接的活跃，清除死链接
+                .childOption(ChannelOption.TCP_NODELAY, true);//socketchannel的设置,关闭延迟发送
+        return serverBootstrap;
+    }
 
-	@Autowired
-	@Qualifier("initializer")
-	private NettyWebSocketChannelInitializer nettyWebSocketChannelInitializer;
+    @Autowired
+    @Qualifier("initializer")
+    private NettyWebSocketChannelInitializer nettyWebSocketChannelInitializer;
 
-	@Bean(name = "tcpChannelOptions")
-	public Map<ChannelOption<?>, Object> tcpChannelOptions() {
-		Map<ChannelOption<?>, Object> options = new HashMap<ChannelOption<?>, Object>();
-		options.put(ChannelOption.SO_KEEPALIVE, keepAlive);
-		options.put(ChannelOption.SO_BACKLOG, backlog);
-		return options;
-	}
+    @Bean(name = "bossGroup", destroyMethod = "shutdownGracefully")
+    public NioEventLoopGroup bossGroup() {
+        return new NioEventLoopGroup(bossCount);
+    }
 
-	@Bean(name = "bossGroup", destroyMethod = "shutdownGracefully")
-	public NioEventLoopGroup bossGroup() {
-		return new NioEventLoopGroup(bossCount);
-	}
+    @Bean(name = "workerGroup", destroyMethod = "shutdownGracefully")
+    public NioEventLoopGroup workerGroup() {
+        return new NioEventLoopGroup(workerCount);
+    }
 
-	@Bean(name = "workerGroup", destroyMethod = "shutdownGracefully")
-	public NioEventLoopGroup workerGroup() {
-		return new NioEventLoopGroup(workerCount);
-	}
+    @Bean(name = "tcpSocketAddress")
+    public InetSocketAddress tcpPort() {
+        return new InetSocketAddress(tcpPort);
+    }
 
-	@Bean(name = "tcpSocketAddress")
-	public InetSocketAddress tcpPort() {
-		return new InetSocketAddress(tcpPort);
-	}
-
-	public static void main(String[] args) throws Exception{
-		ConfigurableApplicationContext context = SpringApplication.run(NettyApplication.class, args);
-		TCPServer tcpServer = context.getBean(TCPServer.class);
-		tcpServer.start();
-	}
+    public static void main(String[] args) throws Exception {
+        ConfigurableApplicationContext context = SpringApplication.run(NettyApplication.class, args);
+        TCPServer tcpServer = context.getBean(TCPServer.class);
+        tcpServer.start();
+    }
 }
