@@ -12,7 +12,7 @@ spring:
     name: murder_mystery
     url: jdbc:mysql://47.96.135.54:3306/murder_mystery?useUnicode=true&zeroDateTimeBehavior=convertToNull
     username: test
-    password: Test123456&
+    password: Xjm123456&
     # 使用druid数据源
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
